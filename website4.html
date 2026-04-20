@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist's Corner</title>
+    <style>
+        /* =========================================
+           GLOBAL STYLES 
+           ========================================= */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.5s ease;
+            background-color: #fce4ec; 
+            color: #4a148c; 
+        }
+
+        /* =========================================
+           LOGIN PAGE 
+           ========================================= */
+        #login-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.2);
+            border: 3px solid #f8bbd0;
+        }
+        .login-box h1 {
+            color: #d81b60;
+            margin-bottom: 10px;
+        }
+        input[type="password"] {
+            padding: 12px;
+            width: 80%;
+            border-radius: 10px;
+            border: 2px solid #f48fb1;
+            margin-top: 15px;
+            font-size: 16px;
+            text-align: center;
+            outline: none;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 25px;
+            background-color: #ab47bc; 
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover { background-color: #8e24aa; }
+
+        /* =========================================
+           MAIN SITE (BLACK & PURPLE THEME)
+           ========================================= */
+        #main-site {
+            display: none; 
+            padding-bottom: 50px;
+        }
+        
+        nav {
+            background-color: #1a002a;
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid #9c27b0;
+        }
+        nav button {
+            background-color: transparent;
+            color: #df80ff;
+            border: 1px solid #df80ff;
+            margin: 0 5px;
+        }
+        nav button:hover {
+            background-color: #9c27b0;
+            color: white;
+        }
+
+        .section {
+            display: none; 
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #121212;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
+            border: 1px solid #4a148c;
+        }
+        .section.active { display: block; }
+        .section h2 {
+            color: #ea80fc;
+            text-align: center;
+            border-bottom: 1px solid #4a148c;
+            padding-bottom: 10px;
+        }
+
+        /* 1. Highlights Styles */
+        .timeline-item {
+            border-left: 3px solid #9c27b0;
+            padding-left: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: "✨";
+            position: absolute;
+            left: -13px;
+            top: 0;
+            background: #000;
+        }
+
+        /* 2. Gallery Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .gallery-item {
+            background-color: #1e0033;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #7b1fa2;
+        }
+        .gallery-item img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        /* 3. Coffee Shop Menu Styles */
+        .coffee-menu-item {
+            background-color: #1e0033;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #d500f9;
+        }
+        .coffee-menu-item h3 { color: #ff80ab; margin-top: 0; }
+
+        /* 4. Open When Cards Styles */
+        .open-when-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background-color: #2a004d;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid #aa00ff;
+        }
+        .card:hover { transform: scale(1.05); }
+        .card-content {
+            display: none; 
+            margin-top: 15px;
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-page">
+        <div class="login-box">
+            <h1>🎨 Artist's Sanctuary 🎨</h1>
+            <p>A small gift for my favorite artist.</p>
+            <input type="password" id="passwordInput" placeholder="Enter the secret phrase...">
+            <br>
+            <button onclick="checkPassword()">Unlock 🗝️</button>
+        </div>
+    </div>
+
+    <div id="main-site">
+        
+        <nav>
+            <button onclick="showSection('highlights')">✨ Highlights</button>
+            <button onclick="showSection('gallery')">🖼️ Gallery</button>
+            <button onclick="showSection('coffee')">☕ Coffee Chats</button>
+            <button onclick="showSection('open-when')">💌 Notes</button>
+        </nav>
+
+        <div id="highlights" class="section active">
+            <h2>Friendship Highlights</h2>
+            
+            <div class="timeline-item">
+                <h3 style="color:#b388ff;">First Impressions</h3>
+                <p>Write about when you first connected and what you thought about her art style back then.</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3 style="color:#b388ff;">A Great Conversation</h3>
+                <p>Talk about a specific time we chatted that was really fun or interesting.</p>
+            </div>
+        </div>
+
+        <div id="gallery" class="section">
+            <h2>The Masterpiece Gallery</h2>
+            <p style="text-align:center;">A collection of my favorite drawings you've made.</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/200x200/4a148c/ffffff?text=Add+Her+Art" alt="Her Art">
+                    <p style="color:#e0e0e0;">Explain why this specific drawing is so cool.</p>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/200x200/4a148c/ffffff?text=Add+Another" alt="Her Art">
+                    <p style="color:#e0e0e0;">Another favorite piece of hers.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="coffee" class="section">
+            <h2>The Midnight Cafe</h2>
+            <p style="text-align:center;">Coffee and a thank you note. ☕</p>
+
+            <div class="coffee-menu-item">
+                <h3>Espresso (Quick Note)</h3>
+                <p>A short paragraph thanking her for always being supportive and a cool person to talk to.</p>
+            </div>
+
+            <div class="coffee-menu-item">
+                <h3>Caramel Latte (The Birthday Note)</h3>
+                <p>Thank her again for the birthday gift she gave you. Talk about how much you appreciate our friendship and how you're always rooting for her art journey.</p>
+            </div>
+        </div>
+
+        <div id="open-when" class="section">
+            <h2>"Open When" Notes</h2>
+            
+            <div class="open-when-grid">
+                <div class="card" onclick="toggleCard(this)">
+                    <h3 style="color:#ea80fc;">💌 Open when you need motivation...</h3>
+                    <div class="card-content">
+                        Remind her how talented she is and that even professional artists have bad days. Tell her to keep going!
+                    </div>
+                </div>
+
+                <div class="card" onclick="toggleCard(this)">
+                    <h3 style="color:#ea80fc;">💌 Open when you're bored...</h3>
+                    <div class="card-content">
+                        Suggest something fun to draw or a topic you guys usually joke about.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function checkPassword() {
+            let pass = document.getElementById("passwordInput").value;
+            let secretPassword = "eve the moon"; 
+
+            if(pass.toLowerCase().trim() === secretPassword) {
+                document.getElementById("login-page").style.display = "none";
+                document.getElementById("main-site").style.display = "block";
+                document.body.style.backgroundColor = "#000000";
+                document.body.style.color = "#ffffff";
+            } else {
+                alert("Wrong phrase! Give it another shot. 🌸");
+            }
+        }
+
+        function showSection(sectionId) {
+            let sections = document.querySelectorAll('.section');
+            sections.forEach(sec => sec.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function toggleCard(cardElement) {
+            let content = cardElement.querySelector('.card-content');
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
